@@ -1,0 +1,70 @@
+---
+interface Props {
+	seo: {
+		title: string
+		description: string
+	}
+}
+
+const { title } = Astro.props.seo
+const { description } = Astro.props.seo
+---
+
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<meta charset='UTF-8' />
+		<meta name='description' content='Astro description' />
+		<meta name='viewport' content='width=device-width' />
+		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+		<meta name='generator' content={Astro.generator} />
+		<meta name='description' content={description} />
+		<title>{title}</title>
+	</head>
+	<body id='main'>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans:wght@400;700&display=swap');
+
+	html,
+	body {
+		font-family: Figtree, 'Noto Sans JP', 'Noto Sans', sans-serif;
+	}
+
+	#main h1 {
+		@apply text-6xl;
+	}
+
+	#main h2 {
+		@apply text-5xl;
+	}
+
+	#main h3 {
+		@apply text-4xl;
+	}
+
+	.typing {
+		max-width: 20rem;
+		margin: 0 auto;
+		width: 100%;
+		animation: typing 4s steps(50), blink 0.5s step-end infinite alternate;
+		white-space: nowrap;
+		overflow: hidden;
+		border-right: 3px solid;
+	}
+
+	@keyframes typing {
+		from {
+			width: 0;
+		}
+	}
+
+	@keyframes blink {
+		50% {
+			border-color: transparent;
+		}
+	}
+</style>

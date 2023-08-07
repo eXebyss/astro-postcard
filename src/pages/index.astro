@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro'
+import PostcardGreeting from '../components/PostcardGreeting.astro'
+import PostcardText from '../components/PostcardText.astro'
+import PostcardTitles from '../components/PostcardTitles.astro'
+import SecretLoot from '../components/SecretLoot.astro'
+
+const seo = {
+	title: 'Happy Birthday!',
+	description: 'Happy Birthday Postcard.',
+}
+---
+
+<Layout seo={seo}>
+	<main>
+		<div class='h-screen carousel carousel-vertical rounded-box'>
+			<PostcardGreeting />
+			<PostcardText />
+			<PostcardTitles />
+			<SecretLoot />
+		</div>
+	</main>
+</Layout>

@@ -1,0 +1,37 @@
+---
+import PortableText from './SanityPortableText.astro'
+import ConfettiButton from './ConfettiButton.astro'
+import { getSanityData } from '../lib'
+
+const qroq = `*[_type == "postcard"][0]{congratulationTitle}`
+
+const { congratulationTitle } = await getSanityData(qroq)
+---
+
+<div class='carousel-item h-full w-screen'>
+	<div class='hero min-h-screen'>
+		<div class='hero-content text-center'>
+			<div id='sanityTitleContainer' class='max-w-md title'>
+				{
+					congratulationTitle ? (
+						<PortableText portableText={congratulationTitle} />
+					) : (
+						<p>No Data Available!</p>
+					)
+				}
+				<ConfettiButton />
+			</div>
+		</div>
+	</div>
+</div>
+
+<style is:global>
+	.title h2 {
+		@apply py-6;
+	}
+</style>
+
+<script>
+	const sanityTextTitle = document.querySelector('div#sanityTitleContainer h2')
+	sanityTextTitle?.classList.add('typing')
+</script>

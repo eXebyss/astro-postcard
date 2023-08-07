@@ -1,0 +1,85 @@
+---
+import { Image } from 'astro:assets'
+import SanityPortableText from './SanityPortableText.astro'
+import { getSanityData, urlForImage } from '../lib'
+
+const qroq = '*[_type == "postcard"][0]{authors, year, avatars}'
+
+const { authors, year, avatars } = await getSanityData(qroq)
+---
+
+<div class='carousel-item h-full w-screen'>
+	<div class='hero min-h-screen'>
+		<div id='sanityTitlesContainer' class='hero-content text-center'>
+			{
+				!authors && !year ? (
+					<div class='max-w-md'>
+						<p>No text found!</p>
+					</div>
+				) : (
+					<div class='hero-content text-center'>
+						<div class='max-w-xl'>
+							<SanityPortableText portableText={authors} />
+							{avatars && (
+								<div class='my-4 flex gap-x-4 justify-center'>
+									{avatars.map((avatar: {}, idx: number) => (
+										<div>
+											<div class='avatar'>
+												<div class='w-24 mask mask-squircle'>
+													<Image
+														alt={`Avatar Nr. ${idx}`}
+														src={`${urlForImage(avatar).url()}`}
+														width={25}
+														height={25}
+													/>
+												</div>
+											</div>
+										</div>
+									))}
+								</div>
+							)}
+							<p class='text-xl my-4 italic font-bold text-primary text-center'>
+								{year}
+							</p>
+						</div>
+					</div>
+				)
+			}
+		</div>
+	</div>
+</div>
+
+<style is:global>
+	div#sanityTitlesContainer p {
+		@apply my-4 text-lg;
+	}
+
+	div#sanityTitlesContainer {
+		opacity: 0;
+		transition: opacity 1s ease-in-out;
+	}
+
+	div#sanityTitlesContainer.show {
+		opacity: 1;
+		transition: opacity 1s ease-in-out;
+	}
+</style>
+
+<script>
+	let observer: IntersectionObserver | null = null
+	const sanityTitlesContainer = document.querySelector(
+		'div#sanityTitlesContainer'
+	)
+
+	if (sanityTitlesContainer) {
+		observer = new IntersectionObserver(entries => {
+			if (entries[0].isIntersecting) {
+				sanityTitlesContainer.classList.add('show')
+			} else {
+				sanityTitlesContainer.classList.remove('show')
+			}
+		})
+
+		observer.observe(sanityTitlesContainer)
+	}
+</script>

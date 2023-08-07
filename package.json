@@ -1,0 +1,31 @@
+{
+  "name": "astro-postcard",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/image": "^0.17.2",
+    "@astrojs/react": "^2.2.1",
+    "@astrojs/tailwind": "^4.0.0",
+    "@astrojs/vercel": "^3.8.0",
+    "@headlessui/react": "^1.7.15",
+    "@portabletext/react": "^3.0.4",
+    "@types/react": "^18.2.16",
+    "@types/react-dom": "^18.2.7",
+    "astro": "^2.9.1",
+    "astro-sanity": "^1.1.7",
+    "js-confetti": "^0.11.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.3"
+  },
+  "devDependencies": {
+    "daisyui": "^3.3.1"
+  }
+}

@@ -1,0 +1,39 @@
+<script>
+	import JSConfetti from 'js-confetti'
+
+	const confetti = new JSConfetti()
+
+	function showConfetti() {
+		confetti.addConfetti()
+	}
+
+	function showConfettiWithInterval() {
+		setInterval(() => {
+			confetti.addConfetti()
+		}, 10000)
+	}
+
+	function showMoreConfetti() {
+		const emojis = ['🎉', '🎂', '🎁', '🎈', '🥳', '🌈', '✨', '💫', '🌸', '🦄']
+		const emoji = emojis[Math.floor(Math.random() * emojis.length)]
+
+		confetti.addConfetti({
+			emojis: [emoji],
+			emojiSize: 50,
+		})
+	}
+
+	const button = document.querySelector('button#confettiButton')
+
+	button &&
+		button.addEventListener('click', () => {
+			showMoreConfetti()
+		})
+
+	showConfetti()
+	showConfettiWithInterval()
+</script>
+
+<button id='confettiButton' type='button' class='btn btn-primary text-base'>
+	More 🎉
+</button>
